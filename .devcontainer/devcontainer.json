@@ -1,0 +1,13 @@
+﻿{
+  "name": "Assignment Reminder",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+    "ghcr.io/devcontainers/features/desktop-lite:1": {
+      "password": "vscode",
+      "webPort": "6080",
+      "vncPort": "5901"
+    }
+  },
+  "forwardPorts": [6080, 5901],
+  "postCreateCommand": "sudo apt update && sudo apt install -y mariadb-server openbox && sudo service mariadb start && sudo mysql -e \"CREATE DATABASE IF NOT EXISTS assignment_db;\" && sudo mysql assignment_db -e \"CREATE TABLE IF NOT EXISTS assignments (id INT AUTO_INCREMENT PRIMARY KEY, title VARCHAR(255) NOT NULL, course VARCHAR(100), due_date DATETIME NOT NULL, priority ENUM('Low','Medium','High') DEFAULT 'Medium', completed BOOLEAN DEFAULT FALSE);\""
+}
